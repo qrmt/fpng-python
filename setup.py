@@ -14,5 +14,6 @@ setup(
     description='Python bindings for fpng',
     author='Oskar Vuola',
     packages=['pyfpng'],
-    ext_modules=[Extension('pyfpng.libpyfpng', ['src/fpng_py.cpp', 'fpng/src/fpng.cpp'], include_dirs=['fpng/src/'], extra_compile_args=extra_compile_args)]
+    ext_modules=[Extension('pyfpng.libpyfpng', ['src/fpng_py.cpp', 'fpng/src/fpng.cpp'], include_dirs=['fpng/src/'], extra_compile_args=extra_compile_args)],
+    install_requires=["numpy>=1.20.0"]
 )
