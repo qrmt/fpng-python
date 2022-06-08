@@ -1,6 +1,7 @@
 # Python Bindings for `fpng`
 
-Implemets python interface to call fpng functions.
+Implemets Python interface to call [fpng](https://github.com/richgel999/fpng) functions.
+`fpng` is a super fast C++ .PNG writer/reader.
 
 Note that the images written / read are in RGB channel order, in contrast to OpenCV
 that reads / writes files in BGR format.
