@@ -2,6 +2,9 @@
 
 Implemets python interface to call fpng functions.
 
+Note that the images written / read are in RGB channel order, in contrast to OpenCV
+that reads / writes files in BGR format.
+
 
 ## Installation
 1. Clone repository `git clone --recurse-submodules git@gitlab.com:labra-public/pyfpng.git`
