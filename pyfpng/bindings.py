@@ -3,7 +3,6 @@ import glob
 import os
 from typing import Optional, Tuple
 
-import cv2
 import numpy as np
 import numpy.typing as npt
 
@@ -33,7 +32,6 @@ def encode_to_file(file_path: str, data: npt.NDArray[np.uint8]) -> bool:
     flags = 0
     filename = file_path.encode('utf-8')
 
-    rgb_data = cv2.cvtColor(data, cv2.COLOR_BGR2RGB)
     pointer = rgb_data.ctypes.data_as(ctypes.POINTER(ctypes.c_void_p))
 
     return handle.encode_to_file(filename, pointer, w, h, c, flags)    
@@ -48,7 +46,6 @@ def decode_file_to_memory(file_path: str, desired_channels:int=3) -> Tuple[int, 
         Darr = ctypes.c_uint8 * w.value * h.value * c.value * ctypes.sizeof(ctypes.c_uint8)
         arr_data = Darr.from_address(out.value)
         res = np.ctypeslib.as_array(arr_data)[0].reshape(h.value, w.value, c.value).copy()
-        res = cv2.cvtColor(res, cv2.COLOR_RGB2BGR)
         handle.free(out)
     else:
         res = None
@@ -68,7 +65,6 @@ def decode_to_memory(data: bytes, desired_channels:int=3)-> Tuple[int, Optional[
         Darr = ctypes.c_uint8 * w.value * h.value * c.value * ctypes.sizeof(ctypes.c_uint8)
         arr_data = Darr.from_address(out.value)
         res = np.ctypeslib.as_array(arr_data)[0].reshape(h.value, w.value, c.value).copy()
-        res = cv2.cvtColor(res, cv2.COLOR_RGB2BGR)
         handle.free(out)
     else:
         res = None
