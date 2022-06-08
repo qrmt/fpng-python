@@ -1,0 +1,3 @@
+[submodule "fpng"]
+	path = fpng
+	url = https://github.com/richgel999/fpng.git
