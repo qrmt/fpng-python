@@ -1,11 +1,11 @@
 import ctypes
-import os
-from typing import Optional, Tuple 
-import numpy as np
-import cv2
-import timeit
-import numpy.typing as npt
 import glob
+import os
+from typing import Optional, Tuple
+
+import cv2
+import numpy as np
+import numpy.typing as npt
 
 # Load extension
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -27,8 +27,8 @@ handle.init()
 
 def init():
     handle.init()
-  
-def encode_to_file(file_path: str, data: npt.NDArray[np.uint8]):
+
+def encode_to_file(file_path: str, data: npt.NDArray[np.uint8]) -> bool:
     h, w, c = data.shape
     flags = 0
     filename = file_path.encode('utf-8')
@@ -56,7 +56,7 @@ def decode_file_to_memory(file_path: str, desired_channels:int=3) -> Tuple[int, 
 
     return ret, res
 
-def decode_to_memory(data: bytes, desired_channels:int=3):
+def decode_to_memory(data: bytes, desired_channels:int=3)-> Tuple[int, Optional[npt.NDArray[np.uint8]]]:
     h, w, c = ctypes.c_uint32(), ctypes.c_uint32(), ctypes.c_uint32()
     out = ctypes.c_void_p()
 
@@ -91,17 +91,13 @@ def get_file_info(data: bytes) -> Tuple[int, int, int, int]:
     # 2> - invalid file - see fpng.h for details
     return ret, h.value, w.value, c.value
 
-def read_image(file_path: str):
+def read_image(file_path: str) -> Tuple[int, Optional[npt.NDArray[np.uint8]]]:
     with open(file_path, 'rb') as f:
         data = f.read()
 
     img = None
     ret, _, _, _ = get_file_info(data)
     if ret == 0:
-        ret_read, img = decode_to_memory(data)
+        ret, img = decode_to_memory(data)
     
-    if img is None:
-        nparr = np.frombuffer(data, np.uint8)
-        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-
-    return img
+    return ret, img
