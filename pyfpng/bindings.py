@@ -32,8 +32,7 @@ def encode_to_file(file_path: str, data: npt.NDArray[np.uint8]) -> bool:
     flags = 0
     filename = file_path.encode('utf-8')
 
-    pointer = rgb_data.ctypes.data_as(ctypes.POINTER(ctypes.c_void_p))
-
+    pointer = data.ctypes.data_as(ctypes.POINTER(ctypes.c_void_p))
     return handle.encode_to_file(filename, pointer, w, h, c, flags)    
 
 def decode_file_to_memory(file_path: str, desired_channels:int=3) -> Tuple[int, Optional[npt.NDArray[np.uint8]]]:
