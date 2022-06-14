@@ -8,7 +8,7 @@ that reads / writes files in BGR format.
 
 
 ## Installation
-1. Clone repository `git clone --recurse-submodules git@gitlab.com:labra-public/pyfpng.git`
+1. Clone repository `git clone --recurse-submodules git@github.com:qrmt/fpng-python.git`
 2. Install `python setup.py install`
 
 ## Usage
