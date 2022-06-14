@@ -15,7 +15,7 @@ static PyObject* fpng_encode_image_to_memory(PyObject *self, PyObject *args)
 
     PyArrayObject *arrData;
     if (!PyArg_ParseTuple(args, "O!", &PyArray_Type, &arrData)){
-        PyErr_SetString(PyExc_ValueError, "Invalid arguments. Pass file destination and RGB uint8 numpy array as arguments!");
+        PyErr_SetString(PyExc_ValueError, "Invalid arguments. RGB uint8 numpy array as argument!");
         return NULL;
     }
 
