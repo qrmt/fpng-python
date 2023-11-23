@@ -14,29 +14,36 @@ that reads / writes files in BGR format.
 ## Usage
 ```
 import pyfpng      # Calls fpng::init() on import
+import numpy as np
+from typing import Optional
 
 # Encode numpy array and write to file:
 data = np.zeros((512, 512, 3), dtype=np.uint8)
 success: bool = pyfpng.encode_image_to_file('sample.png', data)
+print(f"Encode to file success: {success}")
 
 # Encode numpy array to memory
 success: bool
 encoded: Optional[bytes]
 success, encoded = pyfpng.encode_image_to_memory(data)
+print(f"Encode to memory success: {success}")
 
 # Decode file to memory
 success: int # see fpng.h
-data: Optional[NDArray[np.uint8]]
-success, data = pyfpng.decode_file_to_memory('sample.png')
+success, data = pyfpng.decode_file('sample.png')
+print(f"Decode file code: {success}")
 
 # Decode bytes to memory
 with open('sample.png', 'rb') as f:
     bytes_data = f.read()
 
-success, data = pyfpng.decode_to_memory(bytes_data)
+success, data = pyfpng.decode_memory(bytes_data)
+print(f"Decode memory: {success}")
 
 # Get info about file (e.g. if it can be decoded using pyfpng)
 ret, height, width, channels = pyfpng.get_info(bytes_data)
+print(f"Read info: {width}x{height},{channels}")
+
 if ret == 0:
     # can decode...
     ...
