@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools", "wheel", "numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fpng-python"
+version = "0.2"
+description = "Python bindings for fpng"
+authors = [{ name = "Oskar Vuola" }]
+dependencies = ["numpy>=1.20.0"]
