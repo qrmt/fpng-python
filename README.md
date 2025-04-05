@@ -27,13 +27,13 @@ success, encoded = pyfpng.encode_image_to_memory(data)
 # Decode file to memory
 success: int # see fpng.h
 data: Optional[NDArray[np.uint8]]
-success, data = pyfpng.decode_file_to_memory('sample.png')
+success, data = pyfpng.decode_file('sample.png')
 
 # Decode bytes to memory
 with open('sample.png', 'rb') as f:
     bytes_data = f.read()
 
-success, data = pyfpng.decode_to_memory(bytes_data)
+success, data = pyfpng.decode_memory(bytes_data)
 
 # Get info about file (e.g. if it can be decoded using pyfpng)
 ret, height, width, channels = pyfpng.get_info(bytes_data)
